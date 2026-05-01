@@ -1,32 +1,82 @@
-In this project, I analyzed a real-world dataset of Facebook political advertisements from the 2024 U.S. Presidential election. The goal was to compute descriptive statistics at both the dataset level and grouped levels using three different approaches: pure Python, Pandas, and Polars.
+**Project Description and instructions to run all scripts**
+In this project, I analyzed a real-world dataset of Facebook political advertisements from the 2024 U.S. Presidential election. The objective was to compute descriptive statistics at both the dataset level and grouped levels using three different approaches:
 
-I started by working with Python’s standard library to manually compute statistics such as mean, median, standard deviation, and frequency distributions. This helped me understand how these calculations actually work behind the scenes, especially when dealing with messy real-world data like missing values, inconsistent formats, and mixed data types.
+- Pure Python (standard library)
+- Pandas
+- Polars
 
-After that, I replicated the same analysis using Pandas and Polars. The main objective was to ensure that all three scripts produce consistent results, even though they use different tools and approaches. This comparison helped me understand how libraries like Pandas simplify many operations that require more effort in pure Python.
+The goal was not just to generate statistics, but to ensure that all three methods produce consistent results while handling real-world data challenges such as missing values, inconsistent formats, and mixed data types.
 
-**What I Did**
-Loaded and explored a real-world dataset of political ads
-Identified numeric, categorical, and date-like columns using type inference
-Handled missing values and inconsistent formats (e.g., $, commas, empty strings)
-Computed descriptive statistics for:
-Numeric columns (mean, min, max, std, median)
-Categorical columns (unique values, mode, top frequencies)
-Performed grouped analysis by key columns to understand patterns within subsets of the data
-Ensured that all three implementations (Pure Python, Pandas, Polars) produce consistent outputs
-Exported results into structured JSON files for comparison and reproducibility
+How to Run the Scripts
+Make sure the dataset file is placed in the project folder:
+fb_ads_president_scored_anon.csv
 
-**Key Learning**
-One of the most important parts of this project was understanding the difference between manual computation and library-based analysis.
+Install dependencies:
+pip install -r requirements.txt
 
-- In pure Python, I had to explicitly handle edge cases like missing values and type conversion, which gave me a deeper understanding of how statistics are calculated.
-- In Pandas and Polars, many of these operations are optimized and abstracted, making the process faster but less transparent.
+Run scripts:
+python pure_python_grouped_stats.py --file fb_ads_president_scored_anon.csv
+python pandas_grouped_stats.py --file fb_ads_president_scored_anon.csv
+python polars_grouped_stats.py --file fb_ads_president_scored_anon.csv
 
-**Outcome**
-This project helped me realize that while libraries are powerful, understanding the underlying logic is critical to trust and validate results—especially when working with real-world data.
+**Summary of Findings and Insights**
+The dataset contains 246,745 rows and 41 columns, representing a large-scale collection of Facebook political advertisements during the 2024 U.S. Presidential election.
+Ad activity is highly concentrated among a few entities. One page alone contributed over 55,000 ads, which is a significant share of the total dataset, indicating that a small number of organizations dominate political advertising on the platform.
+From the bylines column, the most frequent advertiser is:
+- “HARRIS FOR PRESIDENT” (~49,788 ads)
+- Followed by:
+ - HARRIS VICTORY FUND
+ - BIDEN VICTORY FUND
+ - DONALD J. TRUMP FOR PRESIDENT 2024
+This shows that a few major political campaigns are responsible for a large portion of ad activity.
 
-By the end of this project, I was able to:
+Spending & Reach Patterns
+The average ad spend is around $1,061, but the median is only $49, which shows:
+- Most ads are low-budget
+- A few very expensive ads are skewing the average
+The maximum spend (~$474,999) confirms the presence of extreme outliers (high-budget campaigns).
+Similarly:
+Average impressions ~45,601
+Median impressions ~3,499
 
-- Build three independent scripts that compute identical statistics
-- Perform both dataset-level and grouped-level analysis
-- Handle messy and inconsistent real-world data reliably
-- Compare different data processing approaches and understand their trade-offs
+**Comparison of the Three Approaches**
+
+
+This again shows a highly skewed distribution, where a small number of ads receive very large reach.
+
+**Comparison of the three approaches**
+Pure Python
+- Required manual implementation of:
+    - Mean, median, std deviation
+    - Frequency counts
+    - Type inference
+- Strength:
+    - Full control over logic
+    - Better understanding of how statistics actually work
+- Limitation:
+    - More verbose and slower
+    - Requires handling edge cases manually
+
+Pandas
+- Simplified entire workflow using:
+    - .describe()
+    - .value_counts()
+    - vectorized operations
+- Strength:
+    - Fast and efficient
+    - Handles missing values automatically
+    - Industry-standard tool
+- Limitation:
+    - Abstracts many operations
+    - Less visibility into underlying calculations
+
+Polars
+- Similar to Pandas but:
+    - More performance-oriented
+    - Uses lazy execution and optimized memory handling
+- Strength:
+    - Faster for large datasets
+    - Efficient processing
+- Limitation:
+    - Slightly stricter behavior
+    - Requires more explicit handling in some cases
