@@ -9,15 +9,16 @@ The goal was not just to generate statistics, but to ensure that all three metho
 
 How to Run the Scripts
 Make sure the dataset file is placed in the project folder:
+
 fb_ads_president_scored_anon.csv
 
 Install dependencies:
 pip install -r requirements.txt
 
 Run scripts:
-python pure_python_grouped_stats.py --file fb_ads_president_scored_anon.csv
-python pandas_grouped_stats.py --file fb_ads_president_scored_anon.csv
-python polars_grouped_stats.py --file fb_ads_president_scored_anon.csv
+- python pure_python_grouped_stats.py --file fb_ads_president_scored_anon.csv
+- python pandas_grouped_stats.py --file fb_ads_president_scored_anon.csv
+- python polars_grouped_stats.py --file fb_ads_president_scored_anon.csv
 
 **Summary of Findings and Insights**
 The dataset contains 246,745 rows and 41 columns, representing a large-scale collection of Facebook political advertisements during the 2024 U.S. Presidential election.
